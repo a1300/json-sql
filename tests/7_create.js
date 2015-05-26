@@ -247,4 +247,33 @@ describe('Create', function() {
 		expect(result.query).to.be.equal('create table "users"(name varchar(16) NOT NULL PRIMARY KEY,age int NOT NULL, FOREIGN KEY (name) REFERENCES person(id));');
 	});
 
+	it("should allow few fields", function () {
+		var result = jsonSql.build({
+			type: 'create',
+			table: 'users',
+			tableFields: [
+				{
+					name: "name",
+					type: "String",
+					length: 16,
+					not_null: true,
+					primary_key: true
+				},
+				{
+					name: "age",
+					type: "Number",
+					not_null: true
+				}
+			],
+			foreignKeys: [
+				{
+					field: "name",
+					table: "person",
+					table_field: "id"
+				}
+			]
+		});
+
+		expect(result.query).to.be.equal('create table "users"(name varchar(16) NOT NULL PRIMARY KEY,age int NOT NULL, FOREIGN KEY (name) REFERENCES person(id));');
+	});
 });
