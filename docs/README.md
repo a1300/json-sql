@@ -99,13 +99,14 @@ var sql = jsonSql.build({
 			type: "String",
 			length: 16,
 			not_null: true,
-			unique: true
+			unique: true,
+			default: "empty"
 		}
 	]
 });
 
 sql.query
-// create table "users"(name varchar(16) NOT NULL UNIQUE);
+// create table if not exists "users"("name" varchar(16) NOT NULL default "empty" UNIQUE);
 ```
 
 ---
@@ -349,6 +350,53 @@ var sql = jsonSql.build({
 
 sql.query
 // select distinct * from "table";
+```
+
+---
+
+### tableFields
+
+Should be an `array`
+
+Contains array of table`s fields 
+
+---
+
+### foreignKeys
+
+Should be an `array`
+
+__Example:__
+
+``` js
+var result = jsonSql.build({
+	type: 'create',
+	table: 'users',
+	tableFields: [
+		{
+			name: "name",
+			type: "String",
+			length: 16,
+			not_null: true,
+			primary_key: true
+		},
+		{
+			name: "age",
+			type: "Number",
+			not_null: true
+		}
+	],
+	foreignKeys: [
+		{
+			field: "name",
+			table: "person",
+			table_field: "id"
+		}
+	]
+});
+
+sql.query
+// create table "users"(name varchar(16) NOT NULL PRIMARY KEY,age int NOT NULL, FOREIGN KEY (name) REFERENCES person(id));
 ```
 
 ---
