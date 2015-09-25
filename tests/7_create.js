@@ -3,9 +3,9 @@
 var jsonSql = require('../lib')();
 var expect = require('chai').expect;
 
-describe('Create', function() {
-	it('should throw error without `tableFields` property', function() {
-		expect(function() {
+describe('Create', function () {
+	it('should throw error without `tableFields` property', function () {
+		expect(function () {
 			jsonSql.build({
 				type: 'create',
 				table: 'users'
@@ -13,8 +13,8 @@ describe('Create', function() {
 		}).to.throw('`tableFields` property is not set in `create` clause');
 	});
 
-	it('should throw error with incorrect field type', function() {
-		expect(function() {
+	it('should throw error with incorrect field type', function () {
+		expect(function () {
 			jsonSql.build({
 				type: 'create',
 				table: 'users',
@@ -28,7 +28,7 @@ describe('Create', function() {
 		}).to.throw('Invalid type of field: NotNumber');
 	});
 
-	it('should be ok with `tableFields` property', function() {
+	it('should be ok with `tableFields` property', function () {
 		var result = jsonSql.build({
 			type: 'create',
 			table: 'users',
@@ -44,8 +44,8 @@ describe('Create', function() {
 		expect(result.query).to.be.equal('create table "users"(age int);');
 	});
 
-	it('should throw error when length property for string field not provided', function() {
-		expect(function() {
+	it('should throw error when length property for string field not provided', function () {
+		expect(function () {
 			jsonSql.build({
 				type: 'create',
 				table: 'users',
@@ -59,8 +59,8 @@ describe('Create', function() {
 		}).to.throw('Field length can\'t be less or equal 0');
 	});
 
-	it('should throw error with empty name', function() {
-		expect(function() {
+	it('should throw error with empty name', function () {
+		expect(function () {
 			jsonSql.build({
 				type: 'create',
 				table: 'users',
