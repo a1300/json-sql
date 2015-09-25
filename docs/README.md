@@ -1089,19 +1089,6 @@ var sql = jsonSql.build({
 
 sql.query
 // (select * from "table1") union all (select * from "table2");
-
-//or for sqlite3
-jsonSql.setDialect("sqlite");
-var sql = jsonSql.build({
-    type: 'union',
-    unionqueries: [
-        {type: 'select', table: 'table1'},
-        {type: 'select', table: 'table2'}
-    ]
-});
-
-sql.query
-// select * from "table1" union select * from "table2";
 ```
 
 ---
@@ -1123,6 +1110,19 @@ var sql = jsonSql.build({
 
 sql.query
 // (select * from "table1") union (select * from "table2");
+
+//or for sqlite3
+jsonSql.setDialect("sqlite");
+var sql = jsonSql.build({
+    type: 'union',
+    unionqueries: [
+        {type: 'select', table: 'table1'},
+        {type: 'select', table: 'table2'}
+    ]
+});
+
+sql.query
+// select * from "table1" union select * from "table2";
 ```
 
 ---
