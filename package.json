@@ -17,6 +17,7 @@
     "database"
   ],
   "dependencies": {
+    "bignumber.js": "^9.0.0",
     "underscore": "1.8.2"
   },
   "devDependencies": {
